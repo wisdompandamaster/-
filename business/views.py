@@ -11,8 +11,8 @@ def DoneList(request):
     if request.method == 'GET':
         currentDepartment = request.GET.get('currentDepartment')
         DoneLists = Done.objects.filter(
-            Q(task__startDep=int(currentDepartment)) | Q(task__receiveDep=int(currentDepartment)),
-            Q(task__status=1))
+            Q(task__startDep=int(currentDepartment)) | Q(task__receiveDep=int(currentDepartment))
+            )
         print(DoneLists)
         businessDoneList = []
         for done in DoneLists:
@@ -31,17 +31,44 @@ def DoneList(request):
             message = done.message
             doneTime = done.doneTime
             doneFileAddress = done.doneFileAddress
+            doneFileName = done.doneFileName
             data = {"id": str(ID), "Tag": {"content": content, "color": color}, "status": status,
                     "startTime": startTime, "acceptTime": acceptTime, "deadLine": deadLine,
                     "startDep": startDep, "receiveDep": receiveDep, "introduce": introduce, "fileAddress": fileAddress,
-                    "fileName": fileName, "message": message, "doneTime": doneTime, "doneFileAddress": doneFileAddress
-                    }
+                    "fileName": fileName, "message": message, "doneTime": doneTime, "doneFileAddress": doneFileAddress,
+                    "doneFileName": doneFileName}
             businessDoneList.append(data)
         return JsonResponse(businessDoneList, safe=False)
 
 
 def IngList(request):
-    return None
+    if request.method == 'GET':
+        currentDepartment = request.GET.get('currentDepartment')
+        IngLists = Task.objects.filter(
+            Q(startDep=int(currentDepartment)) | Q(receiveDep=int(currentDepartment)),
+            status__in=[0, 1, 3]).order_by("deadLine")
+        print(IngLists)
+        businessIngList = []
+        for task in IngLists:
+            ID = task.id
+            content = task.tag.content
+            color = task.tag.color
+            status = task.status
+            startTime = task.startTime
+            acceptTime = task.acceptTime
+            deadLine = task.deadLine
+            startDep = task.startDep
+            receiveDep = task.receiveDep
+            introduce = task.introduce
+            fileAddress = task.fileAddress
+            fileName = task.fileName
+            data = {"id": str(ID), "Tag": {"content": content, "color": color}, "status": status,
+                    "startTime": startTime, "acceptTime": acceptTime, "deadLine": deadLine,
+                    "startDep": startDep, "receiveDep": receiveDep, "introduce": introduce, "fileAddress": fileAddress,
+                    "fileName": fileName
+                    }
+            businessIngList.append(data)
+        return JsonResponse(businessIngList, safe=False)
 
 
 def ShowList(request):

@@ -2,48 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02b964f3-f46b-42b5-ab30-0021a7f4228b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/fyhr.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/billboard/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/migrations/0002_done_task_user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/migrations/0003_auto_20200905_1146.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/migrations/0004_auto_20200907_2129.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/migrations/0005_auto_20200907_2146.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fyhr/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fyhr/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fyhr/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fyhr/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fyhr/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/business/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,6 +40,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1gPmTGdWh83MVUEL4ohNUHhrxRq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -145,10 +109,27 @@
       <workItem from="1599293517656" duration="3245000" />
       <workItem from="1599356473787" duration="651000" />
       <workItem from="1599481984934" duration="6715000" />
+      <workItem from="1599491538261" duration="45000" />
+      <workItem from="1599492036260" duration="1852000" />
+      <workItem from="1599534949273" duration="828000" />
+      <workItem from="1599573569827" duration="3283000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
