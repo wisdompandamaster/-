@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from business.models import Tag, Task, Done, User
+from .models import Tag, Task, Done, User
 from django.db.models import Q
 
 
@@ -72,7 +72,31 @@ def IngList(request):
 
 
 def ShowList(request):
-    return None
+    if request.method == 'GET':
+        ShowLists = Done.objects.order_by("doneTime")
+        print(ShowLists)
+        businessShowList = []
+        for done in ShowLists:
+            ID = done.task.id
+            content = done.task.tag.content
+            color = done.task.tag.color
+            startTime = done.task.startTime
+            startDep = done.task.startDep
+            receiveDep = done.task.receiveDep
+            message = done.message
+            doneTime = done.doneTime
+            doneFileAddress = done.doneFileAddress
+            doneFileName = done.doneFileName
+            zanList = list(map(int, done.zanList.split(",")))
+            print(zanList)
+            data = {"id": str(ID), "Tag": {"content": content, "color": color},
+                    "startTime": startTime, "doneTime": doneTime,
+                    "startDep": startDep, "receiveDep": receiveDep, "message": message,
+                    "doneFileAddress": doneFileAddress,
+                    "doneFileName": doneFileName, "zanList": zanList
+                    }
+            businessShowList.append(data)
+    return JsonResponse(businessShowList, safe=False)
 
 
 def Accept(request):
