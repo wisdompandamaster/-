@@ -9,5 +9,5 @@ def login_view(request):
     return HttpResponse('<h1>Hello</h1>')
 
 
-def ChangeInfo(request):
+def change_info(request):
     return None
