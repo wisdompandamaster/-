@@ -20,7 +20,5 @@ from business import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', include('users.urls')),
-    path('business/', include('business.urls')),
-    path('zan/', views.Zan),
-    path('Upload', views.Upload)
+    path('business/', include('business.urls'))
 ]

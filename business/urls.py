@@ -9,4 +9,6 @@ urlpatterns = [
     path('WithDraw/', views.WithDraw),
     path('Submit/', views.Submit),
     path('Start/', views.Start),
+    path('Zan/', views.Zan),
+    path('Upload/', views.Upload)
 ]

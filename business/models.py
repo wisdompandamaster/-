@@ -27,7 +27,7 @@ class Done(models.Model):
     doneTime = models.DateTimeField()
     doneFileAddress = models.CharField(max_length=100)
     doneFileName = models.CharField(max_length=100)
-    zanList = models.CharField(max_length=12)
+    zanList = models.CharField(max_length=12, default="100")
     message = models.TextField()
 
 
