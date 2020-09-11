@@ -2,17 +2,19 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Tag, Task, Done, User
 from django.db.models import Q
+import os
 from django.utils import timezone
+
 
 # Create your views here.
 
-
+# TODO fix the try_except
 def DoneList(request):
     if request.method == 'GET':
         currentDepartment = request.GET.get('currentDepartment')
         DoneLists = Done.objects.filter(
             Q(task__startDep=int(currentDepartment)) | Q(task__receiveDep=int(currentDepartment))
-            )
+        )
         print(DoneLists)
         businessDoneList = []
         for done in DoneLists:
@@ -41,6 +43,7 @@ def DoneList(request):
         return JsonResponse(businessDoneList, safe=False)
 
 
+# TODO fix the try_except
 def IngList(request):
     if request.method == 'GET':
         currentDepartment = request.GET.get('currentDepartment')
@@ -71,6 +74,8 @@ def IngList(request):
         return JsonResponse(businessIngList, safe=False)
 
 
+# TODO fix the try_except
+# TODO fix the announcement
 def ShowList(request):
     if request.method == 'GET':
         ShowLists = Done.objects.order_by("doneTime")
@@ -100,7 +105,9 @@ def ShowList(request):
     return JsonResponse(businessShowList, safe=False)
 
 
+# TODO fix the try_except
 def Accept(request):
+    task = []
     if request.method == "POST":
         ID = int(request.POST.get('id'))
         print(ID)
@@ -110,40 +117,59 @@ def Accept(request):
     return JsonResponse({"status": task[0].status})
 
 
+# TODO fix the try_except
+# TODO delete the file_address
 def WithDraw(request):
+    withdraw = {}
     if request.method == "POST":
         ID = int(request.POST.get('id'))
+        file_address = Task.objects.filter(id=ID).fileAddress
         Task.objects.filter(id=ID).delete()
         Done.objects.filter(task__id=ID).delete()
-        withdraw = {"msg": "成功撤销id="+str(ID)+"号事务"}
+        withdraw = {"msg": "成功撤销id=" + str(ID) + "号事务"}
     return JsonResponse(withdraw)
 
 
-def Submit(request):
-    return None
-
-
-def Zan(request):      # 先把zanList转化为int列表，检测是否部门id在其中，在就删除，不在就添加，再转为字符串
+# TODO fix the try_except
+def Zan(request):
+    msg = ''
     if request.method == "POST":
         ID = int(request.POST.get('id'))
         department = request.POST.get('department')
         zan = Done.objects.filter(task__id=ID)[0]
         Zan = zan.zanList.split(',')
         print(Zan)
-        if department in Zan:            # 赞过就取消，没赞过就点赞
+        if department in Zan:
             Zan.remove(department)
+            msg = '取消点赞'
         else:
             Zan.append(department)
+            msg = '点赞成功'
         zanList = ','.join(Zan)
         zan.zanList = zanList
         zan.save()
-       # Zan.update(zanList=Zan[0].zanList + "," + str(department))
-    return JsonResponse({"msg": "点赞成功"})
+    return JsonResponse({"msg": msg})
 
 
+def Submit(request):
+    return None
+
+
+# TODO fix the try_except
 def Start(request):
     return None
 
 
 def Upload(request):
-    return None
+    if request.method == 'POST':
+        file_path_list = []
+        files = request.FILES.getlist('file')
+        print(files)
+        for file in files:
+            file_path = os.path.join('test', file.name)
+            file_path_list.append(file_path)
+            f = open(file_path, mode='wb')
+            for i in file.chunks():
+                f.write(i)
+            f.close()
+        return JsonResponse({"filename": files[0].name, "fileAddress": file_path_list[0]})
