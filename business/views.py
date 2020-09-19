@@ -4,6 +4,9 @@ from .models import Tag, Task, Done, User
 from django.db.models import Q
 import os
 from django.utils import timezone
+from lanzou.api import LanZouCloud
+import zipfile
+import shutil
 
 
 # Create your views here.
@@ -161,15 +164,38 @@ def Start(request):
 
 
 def Upload(request):
+    lzy = LanZouCloud()
+    # !修改为对应的蓝奏云盘的cookies
+    cookie_for_lzy = {'ylogin': '1639384',
+                      'phpdisk_info': 'AjdXYwxtAzZUZVA4D2FUBwBkAQpZMVw%2BBD8CYQU2ADAENFNnUjYGOVRuBF1ZZVI%2FBjQCMFwzAW8GZgNgVDYENQIwV2IMOwM7VGNQOQ8zVG0AYQEwWTBcOAQ0AjcFZQBkBDRTaFIxBm9UYQRhWQpSOQZjAjhcNgFjBjcDZ1RkBDACNVdt'}
+    if lzy.login_by_cookie(cookie_for_lzy) == LanZouCloud.FAILED:
+        return JsonResponse({"filename": "蓝奏登录失败", "fileAddress": "上传失败"})
+    if lzy.get_dir_list().find_by_name("飞扬人资文件") is None:
+        lzy.mkdir(-1, 'fyhr_use', "飞扬人资文件")
+    cloud_file_id = lzy.get_dir_list().name_id['fyhr_use']
     if request.method == 'POST':
-        file_path_list = []
+        return_fileAddress_list = []
+        return_fileName_list = []
         files = request.FILES.getlist('file')
-        print(files)
         for file in files:
             file_path = os.path.join('test', file.name)
-            file_path_list.append(file_path)
             f = open(file_path, mode='wb')
             for i in file.chunks():
                 f.write(i)
             f.close()
-        return JsonResponse({"filename": files[0].name, "fileAddress": file_path_list[0]})
+            with zipfile.ZipFile(file_path + '.zip', 'w') as z:
+                z.write(file_path)
+
+            try:
+                code = lzy.upload_file(file_path + '.zip', cloud_file_id,
+                                       uploaded_handler=lambda fid, is_file: return_fileAddress_list.append(
+                                           lzy.get_file_info_by_id(fid).durl))
+                if code == LanZouCloud.FAILED:
+                    return JsonResponse({"filename": "文件上传失败", "fileAddress": "上传失败"})
+                return_fileName_list.append(file.name)
+            except Exception as e:
+                print(e)
+            finally:
+                shutil.rmtree('test')
+                os.mkdir('test')
+        return JsonResponse({"filename": return_fileName_list, "fileAddress": return_fileAddress_list})
